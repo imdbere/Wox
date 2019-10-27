@@ -32,7 +32,7 @@ namespace Wox.Plugin.Program
             _settingsStorage = new PluginJsonStorage<Settings>();
             _settings = _settingsStorage.Load();
 
-            Stopwatch.Normal("|Wox.Plugin.Program.Main|Preload programs cost", () =>
+            var preloadcost = Stopwatch.Normal("|Wox.Plugin.Program.Main|Preload programs cost", () =>
             {
                 _win32Storage = new BinaryStorage<Win32[]>("Win32");
                 _win32s = _win32Storage.TryLoad(new Win32[] { });
@@ -41,7 +41,11 @@ namespace Wox.Plugin.Program
             });
             Log.Info($"|Wox.Plugin.Program.Main|Number of preload win32 programs <{_win32s.Length}>");
             Log.Info($"|Wox.Plugin.Program.Main|Number of preload uwps <{_uwps.Length}>");
-                        
+
+            //########DELETE
+            long win32indexcost = 0;
+            long uwpindexcost = 0;
+            
             var a = Task.Run(() =>
             {
                 if (IsStartupIndexProgramsRequired || !_win32s.Any())
@@ -57,6 +61,78 @@ namespace Wox.Plugin.Program
             Task.WaitAll(a, b);
 
             _settings.LastIndexTime = DateTime.Today;
+
+            //########DELETE
+            /*
+             *  With roaming folder already 
+                Preload programs cost <24ms>
+                Program index cost <3163ms>
+
+                no roaming yet (clean)
+                Preload programs cost <79ms>
+                Program index cost <2900ms>
+             *
+             * 
+             */
+
+            long totalindexcost = win32indexcost + uwpindexcost;
+
+            if (preloadcost > 70 || totalindexcost > 4000)
+            {
+#if DEBUG
+#else
+    throw e
+#endif
+            }
+
+            if(_uwps.Count() > 36 || _win32s.Count() > 142)
+            {
+
+            }
+
+            var win32 = _win32s.Where(t1 => _settings.ProgramSources.Any(x => x.Name == t1.Name)).ToList();
+            var uwp = _uwps.Where(t1 => _settings.ProgramSources.Any(x => x.Name == t1.DisplayName)).ToList();
+            //if (win32.Count()>0)
+            //{
+
+            //}
+            //if (uwp.Count() > 0)
+            //{
+
+            //}          
+
+            var queryuwps = _uwps.GroupBy(x => x.UniqueIdentifier)
+              .Where(g => g.Count() > 1)
+              .Select(y => y.Key)
+              .ToList();
+            if (queryuwps.Count > 0)
+            {
+                var duplicates = _uwps.Where(t1 => queryuwps.Any(x => x == t1.UniqueIdentifier)).Select(x => x).ToList();
+            }
+
+            var querywin32 = _win32s.GroupBy(x => x.UniqueIdentifier)
+             .Where(g => g.Count() > 1)
+             .Select(y => y.Key)
+             .ToList();
+            if (querywin32.Count > 0)
+            {                
+                var duplicates = _win32s.Where(t1 => querywin32.Any(x => x == t1.UniqueIdentifier)).Select(x => x).ToList();
+            }
+
+
+            var duplicateLocations = _uwps.Where(x => x.Package.Location == @"C:\Program Files\WindowsApps\microsoft.windowscommunicationsapps_16005.11629.20174.0_x64__8wekyb3d8bbwe").Select(x => x).ToList();
+
+            if(_win32s.Where(x => _settings.DisabledProgramSources.Any(t1 => t1.UniqueIdentifier == x.UniqueIdentifier && x.Enabled)).Count() > 0)
+            {
+                var win32exists = _win32s.Where(x => _settings.DisabledProgramSources.Any(t1 => t1.UniqueIdentifier == x.UniqueIdentifier)).Select(x => x).ToList();
+            }
+
+            if (_uwps.Where(x => _settings.DisabledProgramSources.Any(t1 => t1.UniqueIdentifier == x.UniqueIdentifier && x.Enabled)).Count() > 0)
+            {
+                var uwpsexists = _uwps.Where(x => _settings.DisabledProgramSources.Any(t1 => t1.UniqueIdentifier == x.UniqueIdentifier)).Select(x => x).ToList();
+            }
+
+            //########DELETE
         }
 
         public void Save()
