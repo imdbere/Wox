@@ -6,11 +6,12 @@
              mc:Ignorable="d" 
              Width="400"
              Height="120"
+             RenderOptions.ClearTypeHint="Enabled"
              WindowStartupLocation="CenterScreen">
     <StackPanel Orientation="Vertical">
         <StackPanel Orientation="Horizontal">
             <Label Content="{DynamicResource wox_plugin_program_directory}"/>
-            <TextBox Name="Directory" VerticalAlignment="Center" Width="300" Margin="0,7" />
+            <TextBox RenderOptions.ClearTypeHint="Enabled" Name="Directory" VerticalAlignment="Center" Width="300" Margin="0,7" />
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
             <Button Click="BrowseButton_Click" Content="{DynamicResource wox_plugin_program_browse}" 

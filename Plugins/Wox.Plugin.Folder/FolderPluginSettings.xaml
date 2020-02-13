@@ -4,7 +4,8 @@
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
 			 mc:Ignorable="d" 
-			 d:DesignHeight="300" d:DesignWidth="500">
+			 d:DesignHeight="300" d:DesignWidth="500"
+             RenderOptions.ClearTypeHint="Enabled">
 	<Grid Margin="10">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="*"/>
@@ -18,7 +19,7 @@
 					<GridViewColumn Header="{DynamicResource wox_plugin_folder_folder_path}"  Width="180">
 						<GridViewColumn.CellTemplate>
 							<DataTemplate>
-								<TextBlock Text="{Binding Path}"/>
+								<TextBlock RenderOptions.ClearTypeHint="Enabled" Text="{Binding Path}"/>
 							</DataTemplate>
 						</GridViewColumn.CellTemplate>
 					</GridViewColumn>

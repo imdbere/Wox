@@ -4,7 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="300"
+             RenderOptions.ClearTypeHint="Enabled">
     <Grid Margin="10">
 		<ListView x:Name="lbxCommands" Grid.Row="0">
 			<ListView.View>
@@ -12,14 +13,14 @@
 					<GridViewColumn Header="{DynamicResource wox_plugin_sys_command}"  Width="150">
 						<GridViewColumn.CellTemplate>
 							<DataTemplate>
-								<TextBlock Text="{Binding Title}"/>
+								<TextBlock RenderOptions.ClearTypeHint="Enabled" Text="{Binding Title}"/>
 							</DataTemplate>
 						</GridViewColumn.CellTemplate>
 					</GridViewColumn>
                     <GridViewColumn Header="{DynamicResource wox_plugin_sys_desc}"  Width="Auto">
 						<GridViewColumn.CellTemplate>
 							<DataTemplate>
-								<TextBlock Text="{Binding SubTitle}"/>
+								<TextBlock RenderOptions.ClearTypeHint="Enabled" Text="{Binding SubTitle}"/>
 							</DataTemplate>
 						</GridViewColumn.CellTemplate>
 					</GridViewColumn>

@@ -5,7 +5,8 @@
         Icon="Images\app.png"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
-        Title="Custom Plugin Hotkey" Height="200" Width="674.766">
+        Title="Custom Plugin Hotkey" Height="200" Width="674.766"
+        RenderOptions.ClearTypeHint="Enabled">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
@@ -16,14 +17,14 @@
             <ColumnDefinition Width="150" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <TextBlock Margin="10" FontSize="14" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"
+        <TextBlock RenderOptions.ClearTypeHint="Enabled" Margin="10" FontSize="14" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"
                    HorizontalAlignment="Right" Text="{DynamicResource hotkey}" />
         <wox:HotkeyControl x:Name="ctlHotkey" Margin="10" Grid.Column="1" />
 
-        <TextBlock Margin="10" FontSize="14" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"
+        <TextBlock RenderOptions.ClearTypeHint="Enabled" Margin="10" FontSize="14" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"
                    HorizontalAlignment="Right" Text="{DynamicResource actionKeyword}" />
         <StackPanel Grid.Row="1" Orientation="Horizontal" Grid.Column="1">
-            <TextBox x:Name="tbAction" Margin="10" Width="400" VerticalAlignment="Center" HorizontalAlignment="Left" />
+            <TextBox RenderOptions.ClearTypeHint="Enabled" x:Name="tbAction" Margin="10" Width="400" VerticalAlignment="Center" HorizontalAlignment="Left" />
             <Button x:Name="btnTestActionKeyword" Padding="10 5 10 5" Height="30" Click="BtnTestActionKeyword_OnClick"
                     Content="{DynamicResource preview}" />
         </StackPanel>
@@ -32,7 +33,7 @@
             <Button x:Name="btnCancel" Click="BtnCancel_OnClick" Margin="10 0 10 0" Width="80" Height="25"
                     Content="{DynamicResource cancel}" />
             <Button x:Name="btnAdd" Margin="10 0 10 0" Width="80" Height="25" Click="btnAdd_OnClick">
-                <TextBlock x:Name="lblAdd" Text="{DynamicResource done}" />
+                <TextBlock RenderOptions.ClearTypeHint="Enabled" x:Name="lblAdd" Text="{DynamicResource done}" />
             </Button>
         </StackPanel>
     </Grid>
